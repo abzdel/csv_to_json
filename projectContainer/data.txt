@@ -1,1 +1,1 @@
-https://huggingface.co/datasets/rotten_tomatoes
+https://huggingface.co/datasets/super_glue
