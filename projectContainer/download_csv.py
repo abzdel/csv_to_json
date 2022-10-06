@@ -3,7 +3,7 @@
 from datasets import load_dataset
 import re
 import pandas as pd
-
+import sys
 
 def process_file(name_of_path):
     """
@@ -29,6 +29,27 @@ def strip_csv_link(data):
 
     return r
 
+def choose_config(config_list):
+    """
+    Takes a list of configs and allows user to choose one.
+    Returns the name of the config chosen.
+    """
+    # TODO #2 write a function that allows user to choose a config from a list of configs
+    pass
+
+def find_configs(stderr):
+    """
+    Finds available configs for a given dataset given the error output.
+    Returns a list of configs.
+    """
+    # regex to find "Available: [list of configfs]" in stderr
+    r = re.findall(r"(Available: )(\[.+\])", stderr)
+
+    print('-'*100)
+    print(f"\n\nHERE IS OUR REGEX: {r}\n\n")
+    print('-'*100)
+
+    return r
 
 def load_data(repo_name):
     """
@@ -37,8 +58,18 @@ def load_data(repo_name):
     """    
     # write a function that loads a dataset with repo name and uses the default parameter for name
     # TODO #1 find a way to automate the name parameter
-    dataset = load_dataset(path=repo_name)#, name='boolq')
- 
+    error_flag = 1
+    config_name = 'default'
+    while error_flag == 1:
+
+        try:
+            dataset = load_dataset(path=repo_name, name=config_name)
+
+        except ValueError:
+            print(f"\n\n\nHERE IS OUR ERROR: {sys.exc_info()[1]})\n\n\n")
+            stderr = str(sys.exc_info()[1])
+            find_configs(stderr)
+            break
 
     print('-'*100)
     print(f"dataset {repo_name} successfully loaded!")
