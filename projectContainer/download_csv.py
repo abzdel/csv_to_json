@@ -106,15 +106,13 @@ def join_splits(dataset):
 
     # get each split of dataset from dictionary
     train = dataset.get('train')
-    test = dataset.get('test')
-    val = dataset.get('validation')
+
 
     # convert each to df
-    train, test, val = pd.DataFrame(train), pd.DataFrame(test), pd.DataFrame(val)
+    df = pd.DataFrame(train)
 
     # join them all into one big dataframe
-    df = train.append(test)
-    df = df.append(val)
+
 
     return df
 
@@ -145,4 +143,8 @@ def main(text_file):
 
 # call main function, export dataframe as a csv file
 final_df = main('data.txt')
+#final_df.reset_index(inplace=True)
+final_df.drop_duplicates(inplace=True)
+
 final_df.to_csv('downloaded_data.csv')
+final_df.to_json('downloaded_data.json')
