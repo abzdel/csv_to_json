@@ -35,7 +35,18 @@ def choose_config(config_list):
     Returns the name of the config chosen.
     """
     # TODO #2 write a function that allows user to choose a config from a list of configs
-    pass
+    print("Please choose a config from the following list:\n")
+    for i, config in enumerate(config_list):
+        print(f"{i}: {config}")
+
+    config_choice = int(input("Enter the number of the config you would like to use: "))
+    config_name = config_list[config_choice]
+    if config_choice not in range(len(config_list)):
+        print("\nInvalid choice. Please try again.\n")
+        choose_config(config_list)
+    
+    return config_name
+
 
 def find_configs(stderr):
     """
@@ -43,13 +54,10 @@ def find_configs(stderr):
     Returns a list of configs.
     """
     # regex to find "Available: [list of configfs]" in stderr
-    r = re.findall(r"(Available: )(\[.+\])", stderr)
+    config_list = re.findall(r"(Available: )(\[.+\])", stderr)[0][1]
+    config_list = config_list.replace('[', '').replace(']', '').replace("'", '').split(', ')
 
-    print('-'*100)
-    print(f"\n\nHERE IS OUR REGEX: {r}\n\n")
-    print('-'*100)
-
-    return r
+    return config_list
 
 def load_data(repo_name):
     """
@@ -61,15 +69,15 @@ def load_data(repo_name):
     error_flag = 1
     config_name = 'default'
     while error_flag == 1:
-
         try:
             dataset = load_dataset(path=repo_name, name=config_name)
+            break
 
         except ValueError:
-            print(f"\n\n\nHERE IS OUR ERROR: {sys.exc_info()[1]})\n\n\n")
             stderr = str(sys.exc_info()[1])
-            find_configs(stderr)
-            break
+            config_list = find_configs(stderr)
+            config_name = choose_config(config_list)
+    print("successfully exited loop")
 
     print('-'*100)
     print(f"dataset {repo_name} successfully loaded!")
