@@ -34,17 +34,30 @@ def choose_config(config_list):
     Takes a list of configs and allows user to choose one.
     Returns the name of the config chosen.
     """
-    # TODO #2 write a function that allows user to choose a config from a list of configs
     print("Please choose a config from the following list:\n")
     for i, config in enumerate(config_list):
         print(f"{i}: {config}")
 
-    config_choice = int(input("Enter the number of the config you would like to use: "))
-    config_name = config_list[config_choice]
-    if config_choice not in range(len(config_list)):
-        print("\nInvalid choice. Please try again.\n")
-        choose_config(config_list)
+    # prompt user to enter an integer when choosing the config number
+    # set valid = to False
+    # will be set to true once user enters a valid integer
+    valid = False
+
+    while not valid: #loop until the user enters a valid int
+        try:
+            config_choice = int(input("Enter the number of the config you would like to use: \n"))
+            valid = True #if this point is reached, config_choice is a valid int
+        except ValueError:
+            print('Please only input valid digits\n')
+
+
+
     
+    config_choice = int(config_choice)
+
+
+    config_name = config_list[config_choice]
+
     return config_name
 
 
@@ -77,7 +90,6 @@ def load_data(repo_name):
             stderr = str(sys.exc_info()[1])
             config_list = find_configs(stderr)
             config_name = choose_config(config_list)
-    print("successfully exited loop")
 
     print('-'*100)
     print(f"dataset {repo_name} successfully loaded!")
