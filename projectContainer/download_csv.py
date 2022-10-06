@@ -37,7 +37,7 @@ def load_data(repo_name):
     """    
     # write a function that loads a dataset with repo name and uses the default parameter for name
     # TODO #1 find a way to automate the name parameter
-    dataset = load_dataset(path=repo_name, name='boolq')
+    dataset = load_dataset(path=repo_name)#, name='boolq')
  
 
     print('-'*100)
