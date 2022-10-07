@@ -14,8 +14,8 @@ echo "$line" > data.txt
 python download_csv.py
 
 # convert downloaded_data.csv into json format
-#python csv_to_json.py
-
+python csv_to_json.py
+echo "csv successfully converted to json. Check downloaded_data.json for final result!"
 
 # exit program with success status
 exit 1
