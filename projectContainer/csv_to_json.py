@@ -1,6 +1,7 @@
 import csv
 import json
 
+
 def csv_to_json(csvFilePath, jsonFilePath):
     jsonArray = []
 

@@ -1,4 +1,1 @@
 datasets
-csv
-pandas
-numpy

@@ -1,13 +1,8 @@
-FROM alpine:latest
-
-
-COPY * /app/
+FROM python:latest
 
 WORKDIR /app
+COPY * /app/
 
-RUN apk update && apk add bash && apk add python3
-RUN apk add make && apk add pip3
+RUN pip install -r requirements.txt
 
-
-RUN make install
 CMD ["echo", "Welcome to my csv to json image!"]

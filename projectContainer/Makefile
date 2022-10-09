@@ -5,7 +5,5 @@ install:
 format:
 	black *.py
 
-lint:
-	"finding replacement for pylint"
 
-all: install lint format
+all: install format
