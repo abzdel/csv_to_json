@@ -2,7 +2,8 @@
 A small command line tool that converts csv files to json.
 
 ## Architectural Diagram
-![project2IDS706 drawio](https://user-images.githubusercontent.com/55398496/194773989-fd67ff6c-0f7f-49bf-9a0b-d7f922f7a393.png)
+![project2IDS706 drawio](https://user-images.githubusercontent.com/55398496/194778916-47620616-6ae5-4bae-8c6f-4d02cb38c501.png)
+
 
 ## Key Objectives of this project
 - The main goal is to build a **containerized command line tool** that converts **csv files to json**
